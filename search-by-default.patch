@@ -1,0 +1,16 @@
+diff --git a/surf.c b/surf.c
+index 66dec83..ed7e346 100644
+--- a/surf.c
++++ b/surf.c
+@@ -1706,7 +1706,10 @@ parseuri(const gchar *uri) {
+ 					       uri + strlen(searchengines[i].token) + 1);
+ 	}
+ 
+-	return g_strdup_printf("http://%s", uri);
++	if(strchr(uri, '.') == NULL)
++		return g_strdup_printf(searchengines[0].uri, uri);
++	else
++		return g_strdup_printf("http://%s", uri);
+ }
+ 
+ void
